@@ -28,7 +28,11 @@ function launch-server {
     #    echo "Failed to launch the server; aborting"
     #    exit 1
     #fi
+    rm -rf ./db/*
     ./run.sh 1
+
+    echo "Waiting for server start..."
+    sleep 10
 }
 
 
@@ -113,9 +117,6 @@ function get-tx {
 kill-server
 launch-server
 
-echo "slepping 5 sec due to initial freeze (BC height=0)"
-sleep 5
-
 echo "Checking timestamping API"
 
 echo "Creating a timestamp by 'examples/timestaping-req-1.json'"
@@ -137,6 +138,9 @@ check-transaction 1cd143c7ed95be46f91ca9cd675f02de794378607cba12a07a1d1df6032ec9
 echo "Creating a timestamp by 'examples/timestaping-req-5.json'"
 create-timestamp examples/timestaping-req-5.json
 check-transaction ef5725af0e304b092ad356083f94cd522a5d05b7360d7535dea12436ee77d4c4
+
+get-height
+get-block $RESP
 
 echo "Checking timestamp b32b3423e734f4ec4a9f73f934e314a87b49e48ab7fe97b7f84d606193571b60"
 get-timestamp b32b3423e734f4ec4a9f73f934e314a87b49e48ab7fe97b7f84d606193571b60
