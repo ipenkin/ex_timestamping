@@ -17,7 +17,3 @@ done
 
 echo "$node_count nodes configured and launched"
 
-while :
-do
-	sleep 300
-done

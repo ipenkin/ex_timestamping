@@ -17,17 +17,18 @@ STATUS=0
 # Launches the service and waits until it starts listening
 # on the TCP port 8000.
 function launch-server {
-    cargo run &
-    CTR=0
-    MAXCTR=60
-    while [[ ( -z `lsof -iTCP -sTCP:LISTEN -n -P 2>/dev/null |  awk '{ if ($9 == "*:8000") { print $2 } }'` ) && ( $CTR -lt $MAXCTR ) ]]; do
-      sleep 1
-      CTR=$(( $CTR + 1 ))
-    done
-    if [[ $CTR == $MAXCTR ]]; then
-        echo "Failed to launch the server; aborting"
-        exit 1
-    fi
+    #cargo run &
+    #CTR=0
+    #MAXCTR=60
+    #while [[ ( -z `lsof -iTCP -sTCP:LISTEN -n -P 2>/dev/null |  awk '{ if ($9 == "*:8000") { print $2 } }'` ) && ( $CTR -lt $MAXCTR ) ]]; do
+    #  sleep 1
+    #  CTR=$(( $CTR + 1 ))
+    #done
+    #if [[ $CTR == $MAXCTR ]]; then
+    #    echo "Failed to launch the server; aborting"
+    #    exit 1
+    #fi
+    ./run.sh 1
 }
 
 

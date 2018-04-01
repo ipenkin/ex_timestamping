@@ -186,14 +186,14 @@ impl Api for TimestampingApi {
         let post_base64 = move |req: &mut Request| self_.post_base64(req);
         let self_ = self.clone();
         let get_timestamp = move |req: &mut Request| self_.get_timestamp(req);
-        //let self_ = self.clone();
-        //let get_timestamps = move |req: &mut Request| self_.get_timestamps(req);
+        let self_ = self.clone();
+        let get_timestamps = move |req: &mut Request| self_.get_timestamps(req);
 
         // Bind handlers to specific routes.
         router.post("/v0/timestamp/hash", post_hash, "post_hash_rt`");
         router.post("/v0/timestamp/base64", post_base64, "post_base64_rt`");
         router.get("/v0/timestamp/:data_hash", get_timestamp, "get_timestamp_rt");
         // optional
-        //router.get("/v0/timestamps", get_timestamps, "get_timestamps_rt");
+        router.get("/v0/timestamps", get_timestamps, "get_timestamps_rt");
     }
 }
